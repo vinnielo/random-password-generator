@@ -11,7 +11,7 @@ var randomFunc = {
 
 // Write password to the #password input
 function writePassword() {
-  var password = generatePassword();
+  var password = generatePasswords();
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
@@ -29,6 +29,10 @@ function promptMe(){
        }    
     else{
         promptMe();
+        }
+        for(var i=0; i < passwordLength; i++) {
+            var num = Math.floor(Math.random() * 10) + 1;
+            console.log(num)
         }
 }
 
@@ -87,30 +91,18 @@ console.log(specialChar);
 }
 
 
-function generatePassword(lower, upper, number, symbol, length) {
-	var generatedPassword = '';
-	var typesCount = lower + upper + number + symbol;
-	var typesArr = [{lower}, {upper}, {number}, {symbol}].filter(item => Object.values(item)[0]);
-	
-	// Doesn't have a selected type
-	if(typesCount === 0) {
-		return '';
-	}
+
 	
 	// create a loop
-	for(var i=0; i<length; i+=typesCount) {
-		typesArr.forEach(type => {
-			var funcName = Object.keys(type)[0];
-			generatedPassword += randomFunc[funcName]();
-		});
-	}
-	
-	 finalPassword = generatedPassword.slice(0, length);
-	
-	return finalPassword;
-}
+	// for(var i=0; i < passwordLength; i++) {
+    //     var num = Math.floor(Math.random() * randomFunc) + 1;
+    //     console.log(num)
+    // }
 
-console.log(generatePassword)
+	
+	
+
+
     
     // * random characters function
   

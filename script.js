@@ -1,13 +1,17 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
 var passwordArr = [];
+var randomFunc = {
+    lower: getRandomLower,
+    upper: getRandomUpper,
+    number: getRandomNumber,
+    symbol: getRandomSymbol
+};
 
 
 // Write password to the #password input
 function writePassword() {
   var password = generatePassword();
- 
-  
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
@@ -31,7 +35,7 @@ function promptMe(){
 function askLowerCase(initialPwLength) {
     console.log(initialPwLength);
     var lowerCase = confirm("Do you need lowercase letters?");
-console.log(lowerCase);
+    console.log(lowerCase)
         if (lowerCase === true) {
             // getRandomLower();
             askUpperCase();
@@ -41,6 +45,7 @@ console.log(lowerCase);
             askUpperCase();
         }
 };
+
 
 function askUpperCase() {
     var upperCase = confirm("Do you need UPPERCASE letters?");
@@ -81,13 +86,34 @@ console.log(specialChar);
     }
 }
 
-// * create password function to call back to line 6
-    function createPassword(){
 
-    }
+function generatePassword(lower, upper, number, symbol, length) {
+	var generatedPassword = '';
+	var typesCount = lower + upper + number + symbol;
+	var typesArr = [{lower}, {upper}, {number}, {symbol}].filter(item => Object.values(item)[0]);
+	
+	// Doesn't have a selected type
+	if(typesCount === 0) {
+		return '';
+	}
+	
+	// create a loop
+	for(var i=0; i<length; i+=typesCount) {
+		typesArr.forEach(type => {
+			var funcName = Object.keys(type)[0];
+			generatedPassword += randomFunc[funcName]();
+		});
+	}
+	
+	 finalPassword = generatedPassword.slice(0, length);
+	
+	return finalPassword;
+}
 
+console.log(generatePassword)
     
     // * random characters function
+  
 
     function getRandomLower(){
        return String.fromCharCode(Math.floor(Math.random()*26) + 97) 
@@ -110,7 +136,7 @@ console.log(specialChar);
     console.log(getRandomSymbol());
     console.log(getRandomUpper());
     console.log(getRandomNumber());
-    console.log(getRandomLower())   ;
+    console.log(getRandomLower());
 
 
 

@@ -1,137 +1,91 @@
 // Assignment Code
+function writePassword(){
+
 var generateBtn = document.querySelector("#generate");
-var passwordArr = [];
-var randomFunc = {
-    lower: getRandomLower,
-    upper: getRandomUpper,
-    number: getRandomNumber,
-    symbol: getRandomSymbol
-};
 
 
-// Write password to the #password input
-function writePassword() {
-  var password = generatePasswords();
-  var passwordText = document.querySelector("#password");
+var passwordLength = prompt("How many characters? (min 8, max 128)");
+var lowerCase1 = confirm("Do you need lowercase letters?");
+var upperCase1 = confirm("Do you need UPPERCASE letters?");
+var numbers = confirm("Do you need numbers?");
 
-  passwordText.value = password;
+var specialChar = confirm("Need special characters? (!$%^&)");
+var lowerCase = 'abcdefghijklmnopqrstuvwxyz'.split("");
+var	upperCase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split("");
+var	number = '0123456789'.split("");    
+var	symbol = '*;<>()[]{}#$?!^|'.split("");
 
-}
+var password = "";
+var letterArr = [];
 
-
-//* these are the prompts. if clicked yes or they meet the perameters they move forward. 
-function promptMe(){
-    var passwordLength = prompt("How many characters? (min 8, max 128)");
-    console.log(passwordLength)
-    if (passwordLength >= 8 && passwordLength <= 128)  {
-            askLowerCase(passwordLength);
+console.log(lowerCase)
+    
+// console.log(passwordLength)
+    if (passwordLength >= 8 && passwordLength <= 128)  {       
             
-       }    
-    else{
-        promptMe();
-        }
-        for(var i=0; i < passwordLength; i++) {
-            var num = Math.floor(Math.random() * 10) + 1;
-            console.log(num)
-        }
-}
-
-function askLowerCase(initialPwLength) {
-    console.log(initialPwLength);
-    var lowerCase = confirm("Do you need lowercase letters?");
-    console.log(lowerCase)
-        if (lowerCase === true) {
-            // getRandomLower();
-            askUpperCase();
-        }
-        else {
+            // console.log(password)
+       }  
+       else{
+           
+       } 
+      
+    if (lowerCase1 === true) {
             
-            askUpperCase();
+            
+            letterArr = letterArr.concat(lowerCase)
         }
-};
 
-
-function askUpperCase() {
-    var upperCase = confirm("Do you need UPPERCASE letters?");
-console.log(upperCase);
-    if (upperCase === true) {
+    if (upperCase1 === true) {
         // Logic goes here
-        askNumber();
-    }
-    else {
         
-        askNumber();    
+        letterArr = letterArr.concat(upperCase)
     }
-}
 
-function askNumber() {
-    var numbers = confirm("Do you need numbers?");
-console.log(numbers);
     if (numbers === true) {
         // Logic goes here
-        askSymbol();
-    }
-    else {
         
-        askSymbol();
+        letterArr = letterArr.concat(number)
     }
-}
 
-function askSymbol() {
-    var specialChar = confirm("Need special characters? (!$%^&)");
-console.log(specialChar);
     if (specialChar === true) {
         // Logic goes here
+        letterArr = letterArr.concat(symbol)
         
     }
     else {
         
        
     }
+console.log(letterArr)
+
+
+
+for(var i=0; i < passwordLength; i++) {
+    var random = Math.floor(Math.random() * letterArr.length);
+    // var lRand = Math.floor(Math.random() * lowerCase.length);
+    // var uRand = Math.floor(Math.random() * upperCase.length);
+    // var num = Math.floor(Math.random() * number.length);
+    // var specC = Math.floor(Math.random() * symbol.length);
+    password = password + letterArr[random]
+
+    console.log(password);       
+        
+    }
+
+    document.querySelector("#password").value = password
 }
 
+// // // Add event listener to generate button
+var generateBtn = document.getElementById("generate");
+generateBtn.addEventListener("click", writePassword);
 
 
-	
-	// create a loop
-	// for(var i=0; i < passwordLength; i++) {
-    //     var num = Math.floor(Math.random() * randomFunc) + 1;
-    //     console.log(num)
-    // }
-
-	
-	
 
 
-    
-    // * random characters function
+   
   
 
-    function getRandomLower(){
-       return String.fromCharCode(Math.floor(Math.random()*26) + 97) 
-    }
-
-    function getRandomUpper(){
-        return String.fromCharCode(Math.floor(Math.random()*26) + 65) 
-     }
-
-     function getRandomNumber(){
-        return String.fromCharCode(Math.floor(Math.random()*10) + 48) 
-     }
-
-     function getRandomSymbol() {
-        const symbols = '!@#$%^&*(){}[]=<>/,.'
-        return symbols[Math.floor(Math.random() * symbols.length)];
-    }
- 
-
-    console.log(getRandomSymbol());
-    console.log(getRandomUpper());
-    console.log(getRandomNumber());
-    console.log(getRandomLower());
 
 
 
 
-// // Add event listener to generate button
-generateBtn.addEventListener("click", promptMe);

@@ -1,10 +1,9 @@
 // Assignment Code
 function writePassword() {
-  //  prompts that log into letter array
+  //  Starts prompt prompts that log into letter array
   var passwordLength = prompt("How many characters? (min 8, max 128)");
 
   // values
-
   var lowerCase = "abcdefghijklmnopqrstuvwxyz".split("");
   var upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
   var number = "0123456789".split("");
@@ -20,28 +19,30 @@ function writePassword() {
   // if statements for prompts and confirms
 
   if (passwordLength >= 8 && passwordLength <= 128) {
+    
     var lowerCase1 = confirm("Do you need lowercase letters?");
     var upperCase1 = confirm("Do you need UPPERCASE letters?");
     var numbers = confirm("Do you need numbers?");
     var specialChar = confirm("Need special characters? (!$%^&)");
+
     if (lowerCase1 === true) {
       totalChar = totalChar.concat(lowerCase);
     }
 
     if (upperCase1 === true) {
-      // Logic goes here
+      // concats the characters to the array
 
       totalChar = totalChar.concat(upperCase);
     }
 
     if (numbers === true) {
-      // Logic goes here
+      // concats the characters to the array
 
       totalChar = totalChar.concat(number);
     }
 
     if (specialChar === true) {
-      // Logic goes here
+      // concats the characters to the array
       totalChar = totalChar.concat(symbol);
     } else {
     }
@@ -62,6 +63,7 @@ function writePassword() {
     }
 
     document.querySelector("#password").value = password;
+    // will reload the page if min characters are not met
   } else {
     location.reload();
   }
